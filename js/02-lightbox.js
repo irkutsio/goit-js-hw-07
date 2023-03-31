@@ -15,16 +15,7 @@ const galleryMarkup = galleryItems
 
 galleryList.insertAdjacentHTML("afterbegin", galleryMarkup);
 
-galleryList.addEventListener("click", onClickOpen);
-
-function onClickOpen(event) {
-  event.preventDefault();
-  if (!event.target.classList.contains("gallery__image")) {
-    return;
-  }
-}
-
-var lightbox = new SimpleLightbox(".gallery a", {
+const lightbox = new SimpleLightbox(".gallery a", {
   captions: true,
   captionsData: "alt",
   captionDelay: 250,
