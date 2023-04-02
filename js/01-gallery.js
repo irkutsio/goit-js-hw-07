@@ -1,8 +1,6 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-console.log(galleryItems);
-
 const galleryList = document.querySelector(".gallery");
 
 const galleryMarkup = galleryItems
@@ -31,11 +29,19 @@ function onModalOpen(event) {
 
   const instance = basicLightbox.create(`
     <img src="${event.target.dataset.source}" width="800" height="600">
-`);
-  instance.show();
+`, {
+  onShow: (instance) => {
+    document.addEventListener("keydown", onModalClose)
+  },
+  onclose: (instance) => {
+  document.removeEventListener("keydown", onModalClose)
+}
 
-  galleryList.addEventListener("keydown", onModalClose);
-  function onModalClose(event) {
+});
+
+instance.show();
+  
+ function onModalClose(event) {
     console.log(event);
     if (event.code === "Escape") {
       instance.close();
@@ -43,4 +49,4 @@ function onModalOpen(event) {
   }
 }
 
-// onShow: (instance) => {};
+
